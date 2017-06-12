@@ -32,19 +32,19 @@ Both versions employ the same parameters:
 
 <h4> Optional </h4>
 <li><b>shift_step: </b>number of shifts requested for the shifted array (default: 1)</li>
-<li><b>word_to_id: </b>Sayan's parameter. (default: None)</b>
+<li><b>word_to_id: </b>Sayan's parameter. (default: None)</li>
 <li><b>feat_list: </b>This only works with our modified OpenSmile IS11 features. Leave at None if irrelevant (default: None)</li>
 <li><b>remove_sp: </b>removes sp, which are non-word sounds as labeled in the Fisher dataset.  Leave false if irrelevant (default: False) </li>
 
 <h4> Return </h4>
 <li><b>orig_word_mat: </b>original word matrix</li>
-<li><b>shift_word_mat: </b>shifted word matrix</b>
+<li><b>shift_word_mat: </b>shifted word matrix</b></li>
 <li><b>feat_mat: </b>feature matrix</li>
 <li><b>orig_word_LIWC: </b>LIWC representation based on the original word matrix </li>
 <li><b>hdf5_filepath_mat: </b>hdf5 filepaths from which the original word matrix came from. </li>
-<p> </p>
 
 <h3> Sample Usage</h3>
+
 ```python
 from fastbatch import fastbatch
 import time, sys, os
