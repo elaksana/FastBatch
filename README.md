@@ -45,8 +45,7 @@ Both versions employ the same parameters:
 <p> </p>
 
 <h3> Sample Usage</h3>
-~~~~
-
+```
 from fastbatch import fastbatch
 import time, sys, os
 
@@ -71,5 +70,4 @@ if __name__ == '__main__':
 	ed = time.time()
 	print ed - st
 	sys.stdout.flush()
-
-~~~~
+```
