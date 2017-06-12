@@ -153,8 +153,8 @@ class dataset:
 					if np.nonzero(liwc_vector)!=0:
 						orig_word_LIWC[j,k,4] = 1
 			
-			return orig_word_mat, shift_word_mat, feat_mat, orig_word_text, shift_word_text, orig_word_LIWC, hdf5_filepath_mat
-		
+			#return orig_word_mat, shift_word_mat, feat_mat, orig_word_text, shift_word_text, orig_word_LIWC, hdf5_filepath_mat
+			return orig_word_mat, shift_word_mat, feat_mat, orig_word_LIWC, hdf5_filepath_mat
 		except Exception as e:
 			print 'EXCEPTIONS ON FILE: ' + self.curr_hdf5_name
 			print e.args[0]
@@ -189,14 +189,13 @@ def return_pid(m):
 
 
 class p_dataset_iterator:
-	def __init__(self, file_list_name, feat_dsname, word_dsname, new_file_list_prefix, k, num_threads, batch_size, num_timesteps, shift_step = 1, word_to_id = None, feat_list = None, remove_sp = False):
+	def __init__(self, file_list_name, feat_dsname, word_dsname, new_file_list_prefix, k, batch_size, num_timesteps, shift_step = 1, word_to_id = None, feat_list = None, remove_sp = False):
 		self.file_list_name = file_list_name
 		self.feat_dsname = feat_dsname
 		self.word_dsname = word_dsname
 		self.word_to_id = word_to_id
 		self. new_file_list_prefix = new_file_list_prefix
 		self.k = k
-		self.num_threads = num_threads
 		self.batch_size = batch_size
 		self.num_timesteps = num_timesteps
 		self.shift_step = shift_step
@@ -210,7 +209,7 @@ class p_dataset_iterator:
 			d = manager.dataset(new_list_path, feat_dsname, word_dsname, self.word_to_id, remove_sp = remove_sp, feat_list = feat_list)
 			m = dict({'dataset': d, 'batch_size': batch_size, 'num_timesteps': num_timesteps, 'shift_step': shift_step, 'queue': self.q})
 			self.dataset_list.append(m)
-		self.pool = Pool(self.num_threads) # , self.f_init, [self.q]
+		self.pool = Pool(1) # , self.f_init, [self.q]
 
 		self._populate_queue()
 		#Preload
@@ -266,11 +265,10 @@ if __name__ == '__main__':
 	word_dsname = 'words'
 	new_file_list_prefix = './file_list_'
 	k = 3
-	num_threads = 2
 	batch_size = 20
 	num_timesteps = 20
 	shift_step = 1
-	pdi = p_dataset_iterator(file_list_name, feat_dsname, word_dsname, new_file_list_prefix, k, num_threads, batch_size, num_timesteps, shift_step, feat_list = ['f0', 'shimmer', 'jitter', 'voicing', 'rmsenergy'], remove_sp = True)
+	pdi = p_dataset_iterator(file_list_name, feat_dsname, word_dsname, new_file_list_prefix, k, batch_size, num_timesteps, shift_step, feat_list = ['f0', 'shimmer', 'jitter', 'voicing', 'rmsenergy'], remove_sp = True)
 	
 	#pdi.populate_queue()
 	time_count = 0
