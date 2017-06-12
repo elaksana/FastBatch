@@ -46,6 +46,7 @@ Both versions employ the same parameters:
 
 <h3> Sample Usage</h3>
 ~~~~
+
 from fastbatch import fastbatch
 import time, sys, os
 
@@ -59,7 +60,6 @@ if __name__ == '__main__':
 	num_timesteps = 20
 	shift_step = 1
 	pdi = fastbatch(file_list_name, feat_dsname, word_dsname, new_file_list_prefix, k, batch_size, num_timesteps, shift_step, feat_list = ['f0', 'shimmer', 'jitter', 'voicing', 'rmsenergy'], remove_sp = True)
-
 	time_count = 0
 	st = time.time()
 	for i in range(0, 100):
@@ -71,4 +71,5 @@ if __name__ == '__main__':
 	ed = time.time()
 	print ed - st
 	sys.stdout.flush()
+
 ~~~~
