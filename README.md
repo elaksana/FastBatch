@@ -44,8 +44,8 @@ Both versions employ the same parameters:
 <li><b>hdf5_filepath_mat: </b>hdf5 filepaths from which the original word matrix came from. </li>
 <p> </p>
 
-<h3> Sample </h3>
-```python
+<h3> Sample Usage</h3>
+~~~~
 from fastbatch import fastbatch
 import time, sys, os
 
@@ -71,4 +71,4 @@ if __name__ == '__main__':
 	ed = time.time()
 	print ed - st
 	sys.stdout.flush()
-```
+~~~~
