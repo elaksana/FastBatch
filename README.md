@@ -73,4 +73,4 @@ if __name__ == '__main__':
 ```
 
 <h3> Notes </h3>
-Our LIWC parser currently only support single word occurrances, so it isn't the complete LIWC dictionary.  However, it has most of the entries in it.
+<p>Our LIWC parser currently only support single word occurrances, so it isn't the complete LIWC dictionary.  However, it has most of the entries in it.</p>
