@@ -45,7 +45,7 @@ Both versions employ the same parameters:
 <p> </p>
 
 <h3> Sample </h3>
-```
+```python
 from fastbatch import fastbatch
 import time, sys, os
 
