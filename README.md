@@ -60,7 +60,6 @@ if __name__ == '__main__':
 	shift_step = 1
 	pdi = fastbatch(file_list_name, feat_dsname, word_dsname, new_file_list_prefix, k, batch_size, num_timesteps, shift_step, feat_list = ['f0', 'shimmer', 'jitter', 'voicing', 'rmsenergy'], remove_sp = True)
 
-	#pdi.populate_queue()
 	time_count = 0
 	st = time.time()
 	for i in range(0, 100):
