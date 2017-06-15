@@ -7,7 +7,7 @@ from multiprocessing import Queue
 from multiprocessing import current_process
 from IS11_feat_mapper import search4idx
 #sys.path.append('./simple-examples/data')
-import liwc_parser_optim as liwc
+#import liwc_parser_optim as liwc
 
 
 def clean_line(line):
@@ -36,9 +36,9 @@ class dataset:
 		self.remove_sp = remove_sp
 		self.feat_list = feat_list
 		#self.liwc_parser = liwc.LIWC_Parser("./simple-examples/data/LIWC2015_English.dic")
-		self.liwc_parser = liwc.LIWC_Parser("./LIWC2015_English.dic")
-		self.liwc_parser.set_cat2search(['sad', 'anger',  'anx', 'posemo'])
-		self.num_liwc_categories = 5
+		##self.liwc_parser = liwc.LIWC_Parser("./LIWC2015_English.dic")
+		#self.liwc_parser.set_cat2search(['sad', 'anger',  'anx', 'posemo'])
+		#self.num_liwc_categories = 5
 		
 
 	def get_batch(self, batch_size, num_timesteps, shift_step = 1):
@@ -69,7 +69,7 @@ class dataset:
 				if self.remove_sp:
 					non_sp_idx = np.where(unstripped_words != 'sp')[0]
 					if len(non_sp_idx) == 0:
-						if not self._open_new_hdf5(): return None, None, None, None, None
+						if not self._open_new_hdf5(): return None, None, None, None
 						else: continue
 						
 					if len(non_sp_idx) == len(unstripped_words):
@@ -104,7 +104,7 @@ class dataset:
 					
 					#If there is a new file, open it; if we reached the end of the file list, terminate.
 					if not self._open_new_hdf5():
-						return None, None, None, None, None
+						return None, None, None, None
 					else: pass
 
 
@@ -140,6 +140,7 @@ class dataset:
 			shift_word_mat = word_mat[shift_step:]
 			hdf5_filepath_mat = hdf5_filepath_mat[:-shift_step]
 			feat_mat = feat_mat[:-shift_step].reshape([batch_size, num_timesteps, feat_size])
+			
 			# Apply vocabulary on word matrix (original and shifted)
 			orig_word_list = list(orig_word_mat)
 			shift_word_list = list(shift_word_mat)
@@ -153,7 +154,7 @@ class dataset:
 			orig_word_mat = orig_word_mat.reshape([batch_size, num_timesteps])
 			shift_word_mat = shift_word_mat.reshape([batch_size, num_timesteps])
 			hdf5_filepath_mat = hdf5_filepath_mat.reshape([batch_size, num_timesteps])
-
+			'''
 			# Perform a LIWc computation of the current LIWC context
 			orig_word_LIWC = np.zeros([batch_size, num_timesteps, self.num_liwc_categories], dtype=np.float32)
 			for j in range(batch_size):
@@ -162,11 +163,12 @@ class dataset:
 					orig_word_LIWC[j,k,:4] = liwc_vector
 					if np.nonzero(liwc_vector)!=0:
 						orig_word_LIWC[j,k,4] = 1            
-			
-			return orig_word_mat, shift_word_mat, feat_mat, orig_word_LIWC, hdf5_filepath_mat
+			'''
+			#return orig_word_mat, shift_word_mat, feat_mat, orig_word_LIWC, hdf5_filepath_mat
+			return orig_word_mat, shift_word_mat, feat_mat, hdf5_filepath_mat
 
 		except Exception, e:
-			if self.curr_hdf5_name.split()[0] == '': return None, None, None, None, None
+			if self.curr_hdf5_name.split()[0] == '': return None, None, None, None
 			else:
 				print 'EXCEPTIONS ON FILE: ' + self.curr_hdf5_name+ ': ' + str(e)
 				print e.args[0]
@@ -238,7 +240,7 @@ class p_dataset_iterator:
 			ret_tup = self.q.get()
 		self.batch_lock.release()
 		if self.term_count == self.k:
-			return None, None, None, None, None
+			return None, None, None, None
 		else: return ret_tup 
 			
 	def _populate_queue(self):
@@ -300,7 +302,7 @@ if __name__ == '__main__':
 	print ('Queue size: ' + str(pdi.q.qsize()) + '\n')
 	st = time.time()
 	for i in range(0, 3):	
-		t, u, v, w, x, y, z  = pdi.get_batch()
+		t, u, v, w  = pdi.get_batch()
 		if v is None: break
 	ed = time.time()
 	print ed - st

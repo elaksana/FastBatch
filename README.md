@@ -63,7 +63,7 @@ if __name__ == '__main__':
 	st = time.time()
 	for i in range(0, 100):
 		sys.stdout.flush()
-		a,b,c,d,e = pdi.get_batch()
+		a,b,c,d = pdi.get_batch()
 		if i % 10 == 0:
 			ed = time.time()
 			print str(i) + 'th batch: ' + str(ed - st)
