@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-IS11_feat_map_path = './IS11_feat_names.txt'
+IS11_feat_map_path = './src/IS11_feat_names.txt'
 feat2idx = {}
 
 def load_map():
