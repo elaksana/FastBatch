@@ -1,6 +1,7 @@
 <h1> FastBatch: A Multimodal Parallelized Neural Network Iterator for Python 2.7 </h1>
-<h2> Eugene Laksana, Sayan Ghosh, Stefan Scherer </h2>
-<h2> University of Southern California, Institute for Creative Technologies </h2>
+<h2> Eugene Laksana, Sayan Ghosh, Stefan Scherer <br>
+University of Southern California, Institute for Creative Technologies </h2>
+
 
 <h3> Description </h3>
 <p>A python-based neural network batch iterator with multimodal support.  It works by first splitting the dataset into separate chunks and designating concurrent workers to populate a queue from their assigned chunks. A single process is responsible for retrieving batches from this queue via a get_batch function.  Currently, this version has both numerical and lexical support.</p>
