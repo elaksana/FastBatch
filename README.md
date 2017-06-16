@@ -42,7 +42,6 @@ Both versions employ the same parameters:
 <li><b>orig_word_mat: </b>original word matrix</li>
 <li><b>shift_word_mat: </b>shifted word matrix</b></li>
 <li><b>feat_mat: </b>feature matrix</li>
-<li><b>orig_word_LIWC: </b>LIWC representation based on the original word matrix </li>
 <li><b>hdf5_filepath_mat: </b>hdf5 filepaths from which the original word matrix came from. </li>
 
 <h3> Sample Usage</h3>
@@ -73,6 +72,3 @@ if __name__ == '__main__':
 	print ed - st
 	sys.stdout.flush()
 ```
-
-<h3> Notes </h3>
-<p>Our LIWC parser currently only support single word occurrances, so it isn't the complete LIWC dictionary.  However, it has most of the entries in it.</p>
